@@ -13,7 +13,7 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=myemail@mydomain.com"
+      - "--certificatesresolvers.myresolver.acme.email=bastien.siguier@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
@@ -33,7 +33,7 @@ services:
     expose:
       - "3030"
     environment:
-      ADMIN_PASSWORD: "mypassword"
+      ADMIN_PASSWORD: "admin"
 
   middleware:
     build: ./middleware
@@ -49,7 +49,7 @@ services:
       - "3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.middleware.rule=Host(`data.mydomain.com`)"
+      - "traefik.http.routers.middleware.rule=Host(data.sandbox.data-players.com)"
       - "traefik.http.routers.middleware.entrypoints=websecure"
       - "traefik.http.routers.middleware.tls.certresolver=myresolver"
 
@@ -61,7 +61,7 @@ services:
       - "4000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`mydomain.com`)"
+      - "traefik.http.routers.frontend.rule=Host(sandbox.data-players.com)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
   redis:
